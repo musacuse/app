@@ -5,22 +5,57 @@
     <title>MUSAcuse Property Inspector</title>
     <link rel="shortcut icon" href="/src/favicon.png">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="//unpkg.com/leaflet@1.4.0/dist/leaflet.css"
       integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
       crossorigin=""/>
     <link rel="stylesheet" href="/src/style.css"/>
 
   </head>
   <body>
-    <div class="container-fluid h-100">
-      <div class="row h-100">
-        <div class="h-100 flex-fill" id="map"></div>
-        <div class="" style="width:300px;">Sidebar</div>
+    <div class="container-fluid h-100"><div class="row h-100">
+      <div class="h-100 flex-fill" id="map"></div>
+
+      <div class="sidebar container-fluid" style="width:300px;padding:0 2rem;">
+
+        <div class="row ">
+          <h1>Inspection Catchments</h1>
+        </div>
+
+        <div class="row">
+          <div id="threshold" class="w-100">
+            <input class="d-block w-100" type="range" min="0" max="50" value="25" id="thres-slider">
+            <div class="d-flex flex-row align-items-center">
+              <span class="d-flex">Inspect properties with <br>a score above:</span>
+              <h4 align="right" class="thres-risk flex-grow-1"></h4>
+            </div>
+            <div class="d-flex flex-row align-items-center">
+              <span class="d-flex">Total properties to inspect:</span>
+              <h4 align="right" class="thres-count flex-grow-1 m-0"></h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <table id="catchments" class="display">
+            <thead style="border-bottom:1px solid black;">
+              <tr>
+                <th>ID</th>
+                <th class="w-100">Props to<br>Inspect</th>
+                <th>Avg Risk<br>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- jquery append table -->
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+
+    </div></div>
 
 
 
@@ -29,16 +64,18 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    <script src="//code.jquery.com/jquery-3.4.0.min.js"
+      integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
       crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
       crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    <script src="//unpkg.com/leaflet@1.4.0/dist/leaflet.js"
       integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
       crossorigin=""></script>
 
@@ -48,16 +85,16 @@
       map.getPane('labels').style.zIndex = 650;
       map.getPane('labels').style.pointerEvents = 'none';
 
-      var positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+      var mapBase = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
         attribution: '©OpenStreetMap, ©CartoDB'
       }).addTo(map);
 
-      var positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+      var mapLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
         attribution: '©OpenStreetMap, ©CartoDB',
         pane: 'labels'
       }).addTo(map);
-
-      map.setView([43.0481,-76.1474],13);
     </script>
+
+    <script src="/src/script.js"></script>
   </body>
 </html>
