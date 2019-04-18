@@ -43,16 +43,19 @@ parcels <- c(1:nrow(catchment)) %>%
     mutate(CATCH = c$CATCH)
   
   out <- parcels2018Jul %>%
-    st_join(bounds,
-            left = FALSE)
+    st_join(
+      c,#bounds,
+      left = FALSE
+    )
   
   return(out)
   
 })
 
 lapply(seq_along(parcels),function(i) {
-  filename <- paste0("catch",i)
+  filename <- paste0("catch",i,".geojson")
   geojson_write(parcels[[i]],
                 geometry = "polygon",
-                file = filename)
+                file = filename,
+                overwrite = TRUE)
 })

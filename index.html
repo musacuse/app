@@ -19,10 +19,11 @@
     <div class="container-fluid h-100"><div class="row h-100">
       <div class="h-100 flex-fill" id="map"></div>
 
-      <div class="sidebar container-fluid" style="width:300px;padding:0 2rem;">
+      <div class="sidebar container-fluid overflow-auto h-100 w-25" style="min-width:300px;padding:0 2rem;">
 
-        <div class="row ">
-          <h1>Inspection Catchments</h1>
+        <div class="row">
+          <h1 class="catchments title">Inspection Catchments</h1>
+          <h1 class="parcels title d-none">Catchment <span class="cid"></span></h1>
         </div>
 
         <div class="row">
@@ -33,13 +34,17 @@
               <h4 align="right" class="thres-risk flex-grow-1"></h4>
             </div>
             <div class="d-flex flex-row align-items-center">
-              <span class="d-flex">Total properties to inspect:</span>
+              <span class="d-flex">Total properties <br>to inspect:</span>
+              <h4 align="right" class="thres-total flex-grow-1 m-0"></h4>
+            </div>
+            <div class="d-none flex-row align-items-center parcels" style="display:flex;">
+              <span class="">Catchment <span class="cid d-inline"></span> <br>properties to inspect:</span>
               <h4 align="right" class="thres-count flex-grow-1 m-0"></h4>
             </div>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row catchments">
           <table id="catchments" class="display">
             <thead style="border-bottom:1px solid black;">
               <tr>
@@ -53,13 +58,35 @@
             </tbody>
           </table>
         </div>
+
+        <div class="row parcels d-none">
+          <table id="parcels" class="display">
+            <thead style="border-bottom:1px solid black;">
+              <tr>
+                <th>SBL</th>
+                <th class="w-100">Address</th>
+                <th>Risk Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- jquery append table -->
+            </tbody>
+          </table>
+        </div>
+
+
+
+
+
       </div>
+
+
 
     </div></div>
 
 
 
-
+    <div class="legend" style="position:absolute;bottom:1rem;left:1rem;z-index:1000000;font-weight:bold;color:red;">YES THERE <br>WILL BE A <br>LEGEND</div>
 
 
 
@@ -95,6 +122,6 @@
       }).addTo(map);
     </script>
 
-    <script src="/src/script.js"></script>
+    <script src="/src/index.js"></script>
   </body>
 </html>

@@ -3,15 +3,17 @@ html,body {
   line-height:1.2rem;
 }
 
-th,td {
-  white-space:nowrap;
+#catchments th, #catchments td {
   text-align:right;
   padding:0 1rem 0 0.5rem !important;
 }
 th {padding-bottom:0.5rem !important;}
 
-.dataTables_wrapper {width:100%;}
+table,.dataTables_wrapper {width:100%;}
 .sidebar .row {margin-top:2rem;margin-bottom:2rem;}
 
 tr,td {background-color: initial !important;}
-tr:hover,td:hover {background-color: #eee !important;}
+tr:hover,tr.hover {background-color: #eee !important;}
+.title, tbody tr {cursor:pointer;}
+
+#threshold>div {margin-top:1rem;}
