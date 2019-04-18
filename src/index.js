@@ -1,4 +1,4 @@
-$('document').ready(function(){
+// $('document').ready(function(){
 
   var state = {current:""};
   var data = {};
@@ -30,6 +30,9 @@ $('document').ready(function(){
 
   var addThings = (statename,geojson,zoom) => {
 
+    state.parcels = [];
+    data.parcels = [];
+
     state.current = statename;
     data[statename] = geojson;
 
@@ -38,7 +41,6 @@ $('document').ready(function(){
         map.removeLayer(layer);
       }
     });
-    state.parcels = [];
     state[statename] = L.geoJSON(geojson, {
       style: style,
       onEachFeature: function(feature,layer) {
@@ -63,7 +65,8 @@ $('document').ready(function(){
   var thres = (catchments,parcels) => {
     let t = $('#thres-slider').val();
 
-    $('#catchments tbody').html('')
+    $(`#parcels, #catchments`).DataTable().destroy();
+        $('#catchments tbody, #parcels tbody').html('');
 
     let total = 0;
     catchments.features.forEach(function(cat) {
@@ -72,10 +75,10 @@ $('document').ready(function(){
       total += count;
       // jquery append table for each catchment
       $('#catchments tbody').append(`
-        <tr class="text-nowrap" id="c${cat.OBJECTID}">
-          <td><h4 class="m-1">${cat.OBJECTID}</h4></td>
-          <td>${count}</td>
-          <td>${cat.risk}</td>
+        <tr class="text-nowrap text-right" id="c${cat.OBJECTID}">
+          <td style="padding:0 1rem 0 0.5rem !important;"><h4 class="m-1">${cat.OBJECTID}</h4></td>
+          <td style="padding:0 1rem 0 0.5rem !important;">${count}</td>
+          <td style="padding:0 1rem 0 0.5rem !important;">${cat.risk}</td>
         </tr>
       `);
 
@@ -90,7 +93,7 @@ $('document').ready(function(){
     if (state.current == "parcels") {
       state.parcels.eachLayer(function (layer) {
         layer.setStyle(style);
-        state[state.current].resetStyle(layer);
+        state.parcels.resetStyle(layer);
       });
 
       let props = 0;
@@ -102,14 +105,12 @@ $('document').ready(function(){
           <tr class="text-nowrap" id="p${pcl.SBL_class}">
             <td>${pcl.SBL}</td>
             <td>420 Fake Address</td>
-            <td>${pcl.risk}</td>
+            <td class="text-right">${pcl.risk}</td>
           </tr>
         `);
 
         $(`#p${pcl.SBL_class}`).on({
-          mouseenter: function() {
-            highlightFeature(match("SBL_class",pcl.SBL_class,state.parcels));
-          },
+          mouseenter: function() {highlightFeature(match("SBL_class",pcl.SBL_class,state.parcels))},
           mouseleave: function() {resetHighlight(match("SBL_class",pcl.SBL_class,state.parcels))},
           click: function() {zoomToFeature(match("SBL_class",pcl.SBL_class,state.parcels))}
         });
@@ -119,14 +120,11 @@ $('document').ready(function(){
       $('.thres-count').text(props);
     }
 
-    if (table[state.current] != true) {
-      $(`#${state.current}`).DataTable({
-        "paging"   : false,
-        "info"     : false,
-        "searching": false
-      });
-      table[state.current] = true;
-    }
+    $(`#${state.current}`).DataTable({
+      "paging"   : false,
+      "info"     : false,
+      "searching": false
+    });
 
     $('.thres-total').text(total);
     $('.thres-risk').text(t);
@@ -225,4 +223,4 @@ $('document').ready(function(){
 
   }
 
-});
+// });

@@ -3,10 +3,6 @@ html,body {
   line-height:1.2rem;
 }
 
-#catchments th, #catchments td {
-  text-align:right;
-  padding:0 1rem 0 0.5rem !important;
-}
 th {padding-bottom:0.5rem !important;}
 
 table,.dataTables_wrapper {width:100%;}
