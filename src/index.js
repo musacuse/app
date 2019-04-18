@@ -5,7 +5,7 @@ $('document').ready(function(){
   var table = {};
 
   $.ajax({
-    url:"../data/catchments.geojson",
+    url:"data/catchments.geojson",
     dataType: "json",
     success: function () {},
     error: function (xhr) {console.log(xhr.statusText);}
@@ -206,7 +206,7 @@ $('document').ready(function(){
 
     if (state.current == "catchments") {
       $.ajax({
-        url:`../data/catch${cid}.geojson`,
+        url:`data/catch${cid}.geojson`,
         dataType: "json",
         success: function () {},
         error: function (xhr) {console.log(xhr.statusText);}
