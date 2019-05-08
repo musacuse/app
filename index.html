@@ -19,16 +19,35 @@
     <div class="container-fluid h-100"><div class="row h-100">
       <div class="h-100 flex-fill" id="map"></div>
 
-      <div class="sidebar container-fluid overflow-auto h-100 w-25" style="min-width:300px;padding:0 2rem;">
+      <div
+        class="sidebar container-fluid h-100 w-25 p-0"
+        style="min-width:300px;display:flex;flex-direction:column;"
+      >
 
         <div class="row">
+          <p class="m-0">
+            <a
+              class="musa"
+              href="https://pennmusa.github.io/MUSA_801.io/"
+              style="
+                text-decoration:none;
+                color:black;
+            "
+            >&#129052; Back to Home Page</a>
+            <a class="title back d-none">&#129052; Back to City View</a>
+          </p>
           <h1 class="catchments title">Inspection Catchments</h1>
-          <h1 class="parcels title d-none">Catchment <span class="cid"></span></h1>
+          <h1 class="parcels title d-none">Catchment <span class="cid"></span> Parcels</h1>
         </div>
 
         <div class="row">
           <div id="threshold" class="w-100">
-            <input class="d-block w-100" type="range" min="0" max="50" value="25" id="thres-slider">
+            <div class="d-flex flex-row justify-content-between" style="margin-top:0;font-size:1rem;">
+              <div class="d-flex">< more</div>
+              <div class="d-flex">Properties to Inspect</div>
+              <div class="d-flex">less ></div>
+            </div>
+            <input class="d-block w-100" type="range" min="0" max="100" value="24" id="thres-slider">
             <div class="d-flex flex-row align-items-center">
               <span class="d-flex">Inspect properties with <br>a score above:</span>
               <h4 align="right" class="thres-risk flex-grow-1"></h4>
@@ -59,11 +78,10 @@
           </table>
         </div>
 
-        <div class="row parcels d-none">
+        <div class="row parcels d-none" style="max-width:100%;">
           <table id="parcels" class="display">
             <thead style="border-bottom:1px solid black;">
               <tr>
-                <th>SBL</th>
                 <th class="w-100">Address</th>
                 <th>Risk Score</th>
               </tr>
@@ -86,7 +104,6 @@
 
 
 
-    <div class="legend" style="position:absolute;bottom:1rem;left:1rem;z-index:1000000;font-weight:bold;color:red;">YES THERE <br>WILL BE A <br>LEGEND</div>
 
 
 
