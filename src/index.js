@@ -179,7 +179,7 @@
   legend.onAdd = function (map) {
 
       var div = L.DomUtil.create('div', 'info legend leaflet-bar'),
-          grades = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90],
+          grades = [0, 10, 20, 30, 40, 50],
           labels = [];
 
       div.innerHTML = `
@@ -216,15 +216,15 @@
 
   function getColor(d) {
     return state.current == "parcels" && d >= state.threshold ? '#ff0000' :
-           d > 90 ? '#4d004b' :
-           d > 80 ? '#810f7c' :
-           d > 70 ? '#88419d' :
-           d > 60 ? '#8c6bb1' :
-           d > 50 ? '#8c96c6' :
-           d > 40 ? '#9ebcda' :
-           d > 30 ? '#bfd3e6' :
-           d > 20 ? '#e0ecf4' :
-           d > 10 ? '#f7fcfd' :
+           d > 45 ? '#4d004b' :
+           d > 40 ? '#810f7c' :
+           d > 35 ? '#88419d' :
+           d > 30 ? '#8c6bb1' :
+           d > 25 ? '#8c96c6' :
+           d > 20 ? '#9ebcda' :
+           d > 15 ? '#bfd3e6' :
+           d > 10 ? '#e0ecf4' :
+           d > 5  ? '#f7fcfd' :
            d > 0  ? '#ffffff' :
                     '#aaaaaa';
   }
